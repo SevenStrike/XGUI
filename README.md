@@ -120,7 +120,7 @@ XGUI 是一套面向 Unity Editor 扩展的界面可视化组件库。它让工�
 
 ### 方式 C：通过 Git 安装
 
-仓库地址：<https://github.com/SevenStrike/XGUI_Unity_Package>。在 Package Manager 中使用 `Add package from git URL...` 填入 `https://github.com/SevenStrike/XGUI_Unity_Package.git?path=com.sevenstrike.xgui`。需要锁定版本时在 `#` 后追加 tag 名（如 `#v1.0.0`）。
+仓库地址：<https://github.com/SevenStrike/XGUI_UPM>。在 Package Manager 中使用 `Add package from git URL...` 填入 `https://github.com/SevenStrike/XGUI_UPM.git?path=com.sevenstrike.xgui`。需要锁定版本时在 `#` 后追加 tag 名（如 `#v1.0.0`）。
 
 ### 方式 D：网络受限 / 无 Git 环境
 
@@ -644,11 +644,11 @@ bool isBright = XGUI_Utilitys.ColorBrightness_LimiteGet(theme); // 亮色返回 
 ---
 
 ## 示例与工具入口
-`n> 演示资产以 UPM Sample 形式随包分发。首次使用请打开 `Window > Package Manager`，在 XGUI 的 **Samples** 区域点击 **Import**，导入后位于 `Assets/Samples/XGUI/1.0.0/XGUI Demo/`，可自由修改。
+> 演示资产以 UPM Sample 形式随包分发。首次使用请打开 `Window > Package Manager`，在 XGUI 的 **Samples** 区域点击 **Import**，导入后位于 `Assets/Samples/XGUI/1.0.0/SevenStrikeModules/XGUI/`，可自由修改。
 
 | 入口 | 位置 | 说明 |
 | --- | --- | --- |
-| XGUI 组件总览 | Package Manager → XGUI → Samples → **Import**，再选中 `Assets/Samples/XGUI/1.0.0/XGUI Demo/XGUISamples.asset` | 自定义 Inspector 演示主要控件、布局与手动绘制写法 |
+| XGUI 组件总览 | Package Manager → XGUI → Samples → **Import**，再选中 `Assets/Samples/XGUI/1.0.0/SevenStrikeModules/XGUI/Sample/XGUISamples.asset` | 自定义 Inspector 演示主要控件、布局与手动绘制写法 |
 | EditorPlayer 测试窗口 | `Tools > XGUI > EditorPlayer 完整测试窗口` | 数值 / 音效 / 序列帧三个面板的完整交互 |
 | 内建图标浏览器 | `Tools > XGUI > UnityBuiltinIconsGet ...` | 检索 Unity 内建图标名称 |
 | 新建示例资产 | 右键 `Create > XGUI > CreateSamples` | 生成一份 `XGUI_Samples` 数据资产 |
@@ -660,16 +660,16 @@ bool isBright = XGUI_Utilitys.ColorBrightness_LimiteGet(theme); // 亮色返回 
 ```
 com.sevenstrike.xgui/
 ├─ Fonts/                 6 款字重 OTF 字体
+├─ GUI/                   XGUI.guiskin 皮肤文件
 ├─ Icons/                 Based / Helpbox / Dialogs / Avatars / Samples
 ├─ Shapes/                Group / Button / Toggle / Card / Inputfield / Separator 贴图
 ├─ Scripts/
-│  ├─ Runtime/            XGUI_Dashboard、XGUI_Utilitys、XGUI_Enums、
-│  │                      XGUI_EaseCurveGenerator、XGUI_Samples
-│  └─ Editor/             GUI（gui_*）、Layout（layout_*）、Dialog、Toolbar、
-│                         EditorPlayer、Tools、Samples
-├─ XGUI.guiskin           皮肤文件
+│  ├─ Runtime/            XGUI_Dashboard、XGUI_Utilitys、XGUI_Enums、XGUI_EaseCurveGenerator
+│  └─ Editor/             GUI（gui_*）、Layout（layout_*）、Dialog、Toolbar、EditorPlayer、Tools
 ├─ Samples~/              UPM 示例（Import 前不参与编译）
-│  └─ XGUI Demo/          XGUISamples.asset 演示数据资产
+│  └─ SevenStrikeModules/XGUI/
+│     ├─ Sample/          XGUISamples.asset 演示资产
+│     └─ Scripts/         演示数据类与两个自定义 Inspector
 ├─ package.json           UPM 描述
 ├─ CHANGELOG.md
 └─ LICENSE.md             AGPL-3.0 全文
@@ -709,6 +709,6 @@ com.sevenstrike.xgui/
 | 作者 | 徐寅智（Isaac.Xu） |
 | 团队 | 南京塞维斯传媒有限公司（SevenStrikeMedia） |
 | 官网 | <http://sevenstrike.com/> |
-| 仓库 | <https://github.com/SevenStrike/XGUI_Unity_Package> |
+| 仓库 | <https://github.com/SevenStrike/XGUI_UPM> |
 | 相关插件 | XTween、XHUD、XGUI、XBinder、XGraph |
 | 版权 | Copyright (C) 2025-Present Nanjing SevenStrike Media Co., Ltd. |

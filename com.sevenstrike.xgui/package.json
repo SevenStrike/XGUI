@@ -22,12 +22,12 @@
     {
       "displayName": "XGUI Demo",
       "description": "XGUI 组件演示资产：面板、分组、按钮、开关、滑块、颜色、曲线、列表与编辑器内动效预览。",
-      "path": "Samples~/SevenstrikeModules/XGUI"
+      "path": "Samples~/SevenStrikeModules/XGUI"
     }
   ],
   "license": "AGPL-3.0",
   "licensesUrl": "https://www.gnu.org/licenses/agpl-3.0.html",
-  "documentationUrl": "https://github.com/SevenStrike/XGUI_Unity_Package/blob/main/com.sevenstrike.xgui/README.md",
-  "changelogUrl": "https://github.com/SevenStrike/XGUI_Unity_Package/releases",
+  "documentationUrl": "https://github.com/SevenStrike/XGUI_UPM/blob/main/README.md",
+  "changelogUrl": "https://github.com/SevenStrike/XGUI_UPM/releases",
   "dependencies": {}
 }
