@@ -1,4 +1,4 @@
-## Unity Editor 界面可视化组件工具 (源于Unity 6000.0.38f1开发)
+## XGUI Unity 脚本可视化组件工具 (源于Unity 6000.0.38f1开发)
 [![license](https://img.shields.io/badge/license-AGPLv3.0-white.svg)](https://github.com/SevenStrike/XGUI_UPM/blob/main/LICENSE)&nbsp;&nbsp;
 [![supported](https://img.shields.io/badge/Supported-Unity-success.svg)](https://unity.com/)
 
@@ -808,7 +808,7 @@ com.sevenstrike.xgui/
 |作者|徐寅智（Isaac.Xu）|
 |团队|南京塞维斯传媒有限公司（SevenStrikeMedia）|
 |官网|<http://sevenstrike.com/>|
-|邮箱|2110481973@qq.com / sevenstrike.sina.com|
+|邮箱|2110481973@qq.com / sevenstrike@sina.com|
 |技术群|【SEVEN STRIKE UNITY 实战技术】：https://qm.qq.com/q/wjN4vLPr6E|
 |仓库|<https://github.com/SevenStrike/XGUI_UPM>|
 |相关插件|XTween、XHUD、XGUI、XBinder、XGraph|
