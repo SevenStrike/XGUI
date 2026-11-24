@@ -138,7 +138,7 @@ https://github.com/SevenStrike/XGUI_UPM.git?path=com.sevenstrike.xgui
 
 ## 快速开始
 
-### 30 秒：一个带分组、开关、滑块、按钮的编辑器窗口
+### 快速范例实现：一个带分组、开关、滑块、按钮的编辑器窗口
 
 ```csharp
 using SevenStrikeModules.XGUI.Editor;
@@ -146,17 +146,38 @@ using SevenStrikeModules.XGUI.Runtime;
 using UnityEditor;
 using UnityEngine;
 
-public class MyEditorWindow : EditorWindow
+public class XGUI_Samples : EditorWindow
 {
+    public Color color_primary = Color.cyan;
+    public Color color_secondary = Color.yellow;
+    public Color color_group = Color.black * 0.75f;
+    public Color color_sepline = Color.gray;
+    private Color color_toggle_on;
+    private Color color_toggle_off;
+
     private bool enableFeature;
-    private float speed = 1f;
+    private float speed = 0f;
     private bool fold = true;
 
-    [MenuItem("Tools/XGUI 示例窗口")]
+    private Texture2D icon_recycle;
+    private Texture2D icon_warning;
+    private Texture2D icon_dot;
+
+    [MenuItem("Tools/XGUI/示例窗口")]
     private static void Open()
     {
-        MyEditorWindow window = GetWindow<MyEditorWindow>("XGUI 示例");
-        window.minSize = new Vector2(380, 460);
+        XGUI_Samples window = GetWindow<XGUI_Samples>("XGUI 示例");
+        window.minSize = new Vector2(380, 200);
+    }
+
+    private void OnEnable()
+    {
+        icon_recycle = XGUI.GetBasedIcon("icon_recycle_r");
+        icon_warning = XGUI.GetBasedIcon("icon_warning");
+        icon_dot = XGUI.GetBasedIcon("icon_dot");
+
+        color_toggle_on = XGUI_Utilitys.HexString_To_Color("3BFD9A");
+        color_toggle_off = Color.white * 0.65f;
     }
 
     private void OnGUI()
@@ -165,29 +186,64 @@ public class MyEditorWindow : EditorWindow
             type: XGUIContainerType.Vertical,
             bg_fill: XGUIGroup.缺口纯色边框,
             bg_color: XGUIColor.亮白,
+            bg_color_gui: color_group,
             title: "基础设置",
             title_text_color: Color.white,
             title_size: XGUIFontSize.M,
-            padding: new RectOffset(10, 10, 12, 12),
-            icon: XGUI.GetBasedIcon("icon_recycle_r"),
-            icon_color: XGUI.GetXGUIColor(XGUIColor.柠檬绿),
+            padding: new RectOffset(10, 10, 20, 15),
+            icon: icon_recycle,
+            icon_color: XGUI.GetXGUIColor(XGUIColor.亮橘红),
             foldout: fold);
 
         if (fold)
         {
-            enableFeature = XGUI.layout_toggle(title: "启用模块", prop: enableFeature, title_width: 90);
+            enableFeature = XGUI.layout_toggle(
+                title: "启用模块",
+                title_width: 100,
+                prop: enableFeature,
+                tog_bg_off_color: color_toggle_off,
+                tog_bg_on_color: color_toggle_on,
+                tog_margin: new RectOffset(15, 0, 0, 0),
+                tog_padding: new RectOffset(5, 5, 0, 0),
+                tog_handler_off_color: Color.white,
+                tog_handler_on_color: Color.white);
+
+            XGUI.layout_space(5);
 
             speed = XGUI.layout_slider(
                 title: "速度",
                 prop: speed,
-                left: 0f,
-                right: 10f,
-                title_width: 90);
+                left: 0,
+                right: 100,
+                title_width: 100,
+                title_size: XGUIFontSize.M,
+                title_anchor: TextAnchor.MiddleLeft,
+                status_icon: "icon_dot",
+                status_icon_color: Color.green,
+                prop_margin: new RectOffset(0, 0, 5, 0));
 
-            XGUI.layout_seperator();
+            XGUI.layout_seperator(
+                thickness: 1,
+                color: Color.white * 0.5f,
+                margin: new RectOffset(20, 20, 25, 15));
 
-            if (XGUI.layout_button(text: "应用设置", bg_color: XGUIColor.工业蓝))
+            if (XGUI.layout_button(
+                text: "应用设置",
+                bg_fill: XGUIGroup.实体,
+                bg_color: XGUIColor.亮白,
+                bg_color_gui: Color.white,
+                button_text_color: Color.black,
+                press_color: XGUIColor.深空灰,
+                press_fill: XGUIGroup.实体,
+                press_text_color: Color.white,
+                height: 30,
+                absolute_margin: true,
+                absolute_padding: true,
+                padding: new RectOffset(0, 0, 0, 0),
+                margin: new RectOffset(0, 0, 0, 0)))
+            {
                 Debug.Log($"应用：{enableFeature} / {speed}");
+            }
         }
 
         XGUI.layout_group_end(XGUIContainerType.Vertical);
