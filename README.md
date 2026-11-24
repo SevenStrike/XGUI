@@ -810,6 +810,6 @@ com.sevenstrike.xgui/
 |官网|<http://sevenstrike.com/>|
 |邮箱|2110481973@qq.com / sevenstrike@sina.com|
 |技术群|【SEVEN STRIKE UNITY 实战技术】：https://qm.qq.com/q/wjN4vLPr6E|
-|仓库|<https://github.com/SevenStrike/XGUI_UPM>|
+|仓库|<https://github.com/SevenStrike/XGUI>|
 |相关插件|XTween、XHUD、XGUI、XBinder、XGraph|
 |版权|Copyright (C) 2025-Present Nanjing SevenStrike Media Co., Ltd.|
