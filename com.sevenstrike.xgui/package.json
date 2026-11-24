@@ -20,9 +20,9 @@
   },
   "samples": [
     {
-      "displayName": "XGUI Demo",
+      "displayName": "Demo",
       "description": "XGUI 组件演示资产：面板、分组、按钮、开关、滑块、颜色、曲线、列表与编辑器内动效预览。",
-      "path": "Samples~/SevenStrikeModules/XGUI"
+      "path": "Samples~"
     }
   ],
   "license": "AGPL-3.0",
