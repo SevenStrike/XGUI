@@ -27,7 +27,7 @@
   ],
   "license": "AGPL-3.0",
   "licensesUrl": "https://www.gnu.org/licenses/agpl-3.0.html",
-  "documentationUrl": "https://github.com/SevenStrike/XGUI_UPM/blob/main/README.md",
-  "changelogUrl": "https://github.com/SevenStrike/XGUI_UPM/releases",
+  "documentationUrl": "https://github.com/SevenStrike/XGUI_Unity_Package/blob/main/com.sevenstrike.xgui/README.md",
+  "changelogUrl": "https://github.com/SevenStrike/XGUI_Unity_Package/releases",
   "dependencies": {}
 }

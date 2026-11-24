@@ -630,7 +630,7 @@ namespace SevenStrikeModules.XGUI.Editor
         /// <summary>
         /// 获取按钮背景填充
         /// </summary>
-        /// <param name="Mode">类型</param>
+        /// <param name="Mode">类型（按钮只支持："实体"，"边框"，"纯色边框"，"透明" 这几种填充模式）</param>
         /// <param name="Color">颜色（具体请查看工程目录中文件的实际名称）</param>
         public static Texture2D GetBtnFillTexture(XGUIGroup Mode, XGUIColor Color)
         {
