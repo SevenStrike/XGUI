@@ -26,11 +26,10 @@ XGUI 是一套面向 Unity Editor 扩展的界面可视化组件库。它让工�
 ## 界面预览
 
 <p align="center">
-  <img src="Docs/p_0.png" width="30%" alt="XGUI 组件总览">
-  <img src="Docs/p_1.png" width="30%" alt="XGUI 卡片与下拉">
-  <img src="Docs/p_2.png" width="30%" alt="XGUI 卡片与下拉">
+  <img src="Docs/p_0.png" width="30%" alt="XGUI p_0.png">
+  <img src="Docs/p_1.png" width="30%" alt="XGUI p_1.png">
+  <img src="Docs/p_2.png" width="30%" alt="XGUI p_2.png">
 </p>
-<p align="center"><sub>标题、横幅、折叠分组、图标按钮、工具条与路径选择　｜　三层堆叠卡片、下拉选择与资源预览</sub></p>
 
 ## 特性一览
 
