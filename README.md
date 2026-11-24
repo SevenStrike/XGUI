@@ -26,22 +26,11 @@ XGUI 是一套面向 Unity Editor 扩展的界面可视化组件库。它让工�
 ## 界面预览
 
 <p align="center">
-  <img src="docs/images/01-overview.png" width="48%" alt="XGUI 组件总览">
-  <img src="docs/images/02-cards-popup.png" width="48%" alt="XGUI 卡片与下拉">
+  <img src="docs/p_0.png" width="48%" alt="XGUI 组件总览">
+  <img src="docs/p_1.png" width="48%" alt="XGUI 卡片与下拉">
+  <img src="docs/p_2.png" width="48%" alt="XGUI 卡片与下拉">
 </p>
 <p align="center"><sub>标题、横幅、折叠分组、图标按钮、工具条与路径选择　｜　三层堆叠卡片、下拉选择与资源预览</sub></p>
-
-<p align="center">
-  <img src="docs/images/03-toggles-status.png" width="48%" alt="XGUI 开关与状态">
-  <img src="docs/images/04-sliders-inputs.png" width="48%" alt="XGUI 滑块与输入框">
-</p>
-<p align="center"><sub>嵌入 / 实体 / 边框三种开关与状态显示控件　｜　单值/双滑块、文本、数值与向量输入</sub></p>
-
-<p align="center">
-  <img src="docs/images/05-colors-curves.png" width="48%" alt="XGUI 颜色与曲线">
-  <img src="docs/images/06-status-list.png" width="48%" alt="XGUI 状态面板与列表">
-</p>
-<p align="center"><sub>颜色字段、HEX 显示与曲线字段　｜　缓动类型展示、头像列表与虚拟滚动</sub></p>
 
 ## 特性一览
 
