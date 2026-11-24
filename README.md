@@ -120,7 +120,15 @@ XGUI 是一套面向 Unity Editor 扩展的界面可视化组件库。它让工�
 
 ### 方式 C：通过 Git 安装
 
-仓库地址：<https://github.com/SevenStrike/XGUI_UPM>。在 Package Manager 中使用 `Add package from git URL...` 填入 `https://github.com/SevenStrike/XGUI_UPM.git?path=com.sevenstrike.xgui`。需要锁定版本时在 `#` 后追加 tag 名（如 `#v1.0.0`）。
+仓库地址：<https://github.com/SevenStrike/XGUI_UPM>。
+
+**Git 安装地址**
+在 Package Manager 中使用 `Add package from git URL...` 填入以下命令行即可；需要锁定版本时在命令行后追加 `#tag` （如 `#v1.0.0`）
+
+```text
+https://github.com/SevenStrike/XGUI_UPM.git?path=com.sevenstrike.xgui
+```
+
 
 ### 方式 D：网络受限 / 无 Git 环境
 
