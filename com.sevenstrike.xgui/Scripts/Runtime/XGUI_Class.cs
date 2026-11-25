@@ -1,7 +1,7 @@
-using UnityEngine;
-
 namespace SevenStrikeModules.XGUI.Runtime
 {
+    using UnityEngine;
+
     [System.Serializable]
     public class XGUI_CardData
     {

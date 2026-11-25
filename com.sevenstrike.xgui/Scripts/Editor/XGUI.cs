@@ -24,7 +24,6 @@ namespace SevenStrikeModules.XGUI.Editor
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using System.Security.Cryptography;
     using UnityEditor;
     using UnityEngine;
     using static XGUI_EaseCurveGenerator;

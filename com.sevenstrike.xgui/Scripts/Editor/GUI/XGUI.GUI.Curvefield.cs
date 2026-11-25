@@ -22,7 +22,6 @@ namespace SevenStrikeModules.XGUI.Editor
 {
     using SevenStrikeModules.XGUI.Runtime;
     using System;
-    using System.Security.Cryptography;
     using UnityEditor;
     using UnityEngine;
 
