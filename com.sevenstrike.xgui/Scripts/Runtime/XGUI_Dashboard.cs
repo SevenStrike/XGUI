@@ -130,7 +130,5 @@ namespace SevenStrikeModules.XGUI.Runtime
             return string.Empty;
 #endif
         }
-
-
     }
 }
