@@ -22,7 +22,6 @@ namespace SevenStrikeModules.XGUI.Editor
 {
     using SevenStrikeModules.XGUI.Runtime;
     using System;
-    using System.IO;
     using UnityEditor;
     using UnityEngine;
 
@@ -156,7 +155,7 @@ namespace SevenStrikeModules.XGUI.Editor
                 press_text_color: XGUI_Utilitys.ColorBrightness_LimiteGet(Color.white) ? Color.white : Color.black,
                 font_size: btn_fontsize,
                 anchor: TextAnchor.MiddleCenter,
-                margin: new RectOffset(10, 0, 0, 0),
+                margin: new RectOffset(10, 0, 1, 0),
                 padding: new RectOffset(0, 0, 0, 0),
                 layout_width: 100,
                 layout_min_width: 10,
