@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0A0906">
+<title>XGUI · Unity Editor 界面组件库</title>
+<meta name="description" content="XGUI 是一套面向 Unity Editor 扩展的界面可视化组件库：17 种主题色与 5 种容器填充、20 余种控件、三形态弹窗、43 种缓动曲线与编辑器内动效预览。">
+<style>
+/* ================= 基础 ================= */
+:root{
+  --bg:#0A0906;
+  --bg-soft:#0F0D07;
+  --panel:#14110A;
+  --panel-2:#181408;
+  --line:rgba(255,255,255,.085);
+  --line-strong:rgba(255,255,255,.15);
+  --text:#F2EDDF;
+  --text-dim:#B6AC95;
+  --text-mute:#7E7565;
+  --accent:#F7CF55;
+  --accent-bright:#FFE58F;
+  --accent-soft:rgba(247,207,85,.12);
+  --accent-line:rgba(247,207,85,.34);
+  --danger:#FF8B76;
+  --iris:url("data:image/png;base64,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") center/contain no-repeat;
+  --radius:16px;
+  --mono:"Cascadia Code","JetBrains Mono","SF Mono",Consolas,"Liberation Mono",monospace;
+  --sans:"PingFang SC","Microsoft YaHei","Hiragino Sans GB","Noto Sans SC",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);color:var(--text);font-family:var(--sans);
+  line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(880px 500px at 76% -6%, rgba(247,207,85,.13), transparent 62%),
+    radial-gradient(680px 480px at 6% 10%, rgba(247,207,85,.05), transparent 65%),
+    linear-gradient(180deg,#0A0906 0%,#0A0906 42%,#080704 100%);
+}
+body::after{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.45;
+  background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(ellipse 90% 60% at 50% 0%,#000 20%,transparent 78%);
+  -webkit-mask-image:radial-gradient(ellipse 90% 60% at 50% 0%,#000 20%,transparent 78%);
+}
+.wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 24px}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+
+/* ================= 顶部导航 ================= */
+.nav{
+  position:sticky;top:0;z-index:40;
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  background:rgba(10,9,6,.74);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.nav-in{max-width:1180px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;gap:28px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.4px;font-size:17px}
+.brand-mark{
+  width:28px;height:28px;border-radius:9px;display:grid;place-items:center;
+  background:linear-gradient(145deg,rgba(247,207,85,.26),rgba(247,207,85,.04));
+  border:1px solid var(--accent-line);
+  box-shadow:0 0 22px rgba(247,207,85,.2);
+}
+.brand-mark .mark-iris{width:19px;height:19px;background:#FFFFFF;-webkit-mask:var(--iris);mask:var(--iris);-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center}
+.nav-links{display:flex;align-items:center;gap:26px;margin-left:auto;font-size:13.5px;color:var(--text-dim)}
+.nav-links a{position:relative;padding:4px 0;transition:color .2s}
+.nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.nav-links a:hover{color:var(--text)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-cta{display:flex;gap:10px;align-items:center}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:10px 18px;border-radius:10px;font-size:13.5px;font-weight:600;
+  border:1px solid var(--line-strong);color:var(--text);background:rgba(255,255,255,.03);
+  transition:border-color .2s,background .2s,transform .15s;white-space:nowrap;cursor:pointer;
+}
+.btn:hover{border-color:var(--accent-line);background:var(--accent-soft);transform:translateY(-1px)}
+.btn-primary{background:var(--accent);border-color:var(--accent);color:#1D1605}
+.btn-primary:hover{background:var(--accent-bright);border-color:var(--accent-bright);color:#1D1605}
+.btn svg{width:15px;height:15px;flex:none}
+.nav-toggle{display:none;margin-left:auto;width:38px;height:38px;border-radius:10px;border:1px solid var(--line);background:transparent;color:var(--text);cursor:pointer}
+.mobile-menu{display:none;border-top:1px solid var(--line);background:rgba(10,9,6,.97);padding:6px 24px 12px;gap:0}
+.mobile-menu.open{display:grid}
+.mobile-menu a{padding:10px 2px;font-size:14px;color:var(--text-dim);border-bottom:1px solid rgba(255,255,255,.05)}
+.mobile-menu a:last-child{border-bottom:0;color:var(--accent)}
+
+/* ================= Hero ================= */
+.hero{padding:80px 0 64px;position:relative}
+.hero-grid{display:grid;grid-template-columns:1.12fr .88fr;gap:56px;align-items:center}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:9px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--accent);border:1px solid var(--accent-line);background:var(--accent-soft);
+  padding:6px 12px;border-radius:999px;font-weight:600;
+}
+.eyebrow i{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 10px var(--accent);display:block}
+h1{
+  font-size:clamp(34px,4.4vw,56px);line-height:1.14;letter-spacing:-.5px;font-weight:800;
+  margin:22px 0 20px;
+}
+h1 .grad{
+  background:linear-gradient(96deg,#FFFDF4 6%,#FFE9A8 56%,#F7CF55 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero p.lead{font-size:16.5px;color:var(--text-dim);max-width:540px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.metrics{display:flex;flex-wrap:wrap;gap:14px 38px;margin-top:42px;padding-top:26px;border-top:1px solid var(--line)}
+.metric b{display:block;font-size:24px;font-weight:800;letter-spacing:-.4px;color:var(--text)}
+.metric b span{color:var(--accent);font-size:15px;margin-left:3px;font-weight:600}
+.metric small{color:var(--text-mute);font-size:12.5px;letter-spacing:.02em}
+
+.hero-shot{position:relative;display:flex;flex-direction:column;align-items:center;gap:20px}
+.shot-frame{
+  position:relative;width:100%;max-width:376px;margin:0 auto;border-radius:18px;overflow:hidden;
+  border:1px solid rgba(255,255,255,.13);background:#0B0A07;
+  box-shadow:0 30px 80px -30px rgba(0,0,0,.92),0 0 0 1px rgba(247,207,85,.07) inset;
+  transform:perspective(1400px) rotateY(-6deg) rotateX(2deg);
+  transition:transform .5s cubic-bezier(.2,.7,.3,1);
+}
+.hero-shot:hover .shot-frame{transform:perspective(1400px) rotateY(-2deg) rotateX(0deg)}
+.shot-bar{display:flex;align-items:center;gap:7px;padding:9px 13px;border-bottom:1px solid var(--line);background:#0E0C07}
+.shot-bar i{width:8px;height:8px;border-radius:50%;background:#3A3426;display:block}
+.shot-bar i:nth-child(1){background:#4C442F}
+.shot-bar span{margin-left:8px;font-size:11.5px;color:var(--text-mute);font-family:var(--mono)}
+.shot-frame img{width:100%;height:auto}
+.float-chip{
+  position:absolute;font-size:11.5px;font-family:var(--mono);letter-spacing:.02em;
+  padding:6px 11px;border-radius:8px;background:rgba(12,10,6,.92);border:1px solid var(--accent-line);
+  color:var(--accent);box-shadow:0 12px 30px -12px rgba(0,0,0,.9);backdrop-filter:blur(6px);
+}
+.chip-a{top:-46px;right:-6px}
+
+.palette{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;width:100%;max-width:460px}
+.sw{width:18px;height:18px;border-radius:5px;border:1px solid rgba(255,255,255,.16);transition:transform .2s}
+.sw:hover{transform:translateY(-2px) scale(1.12)}
+.palette-note{font-size:11px;color:var(--text-mute);font-family:var(--mono);text-align:center;letter-spacing:.02em}
+
+/* ================= 通用区块 ================= */
+section{padding:72px 0;position:relative}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:34px}
+.sec-kicker{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:10px}
+.sec-head h2{font-size:clamp(24px,2.6vw,34px);font-weight:800;letter-spacing:-.4px;line-height:1.3}
+.sec-head p{color:var(--text-dim);font-size:14.5px;max-width:430px}
+
+/* 对照 */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.col{border:1px solid var(--line);border-radius:var(--radius);padding:26px;background:var(--panel)}
+.col.bad{background:linear-gradient(180deg,rgba(255,255,255,.02),transparent)}
+.col.good{border-color:var(--accent-line);background:linear-gradient(180deg,rgba(247,207,85,.07),rgba(247,207,85,.01))}
+.col h3{font-size:14px;letter-spacing:.04em;font-weight:700;display:flex;align-items:center;gap:9px;margin-bottom:18px;color:var(--text-dim)}
+.col.good h3{color:var(--accent)}
+.col h3 em{font-style:normal;font-size:11px;padding:2px 8px;border-radius:6px;background:rgba(255,255,255,.06);color:var(--text-mute);letter-spacing:0}
+.col ul{list-style:none;display:grid;gap:13px}
+.col li{display:flex;gap:11px;font-size:14px;color:var(--text-dim);line-height:1.55}
+.col li b{color:var(--text);font-weight:600}
+.mark{flex:none;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font-size:10px;margin-top:3px}
+.col.bad .mark{background:rgba(255,255,255,.06);color:#8F8674}
+.col.good .mark{background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent-line)}
+
+/* 两种写法 */
+.paths{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.path-card{border:1px solid var(--line);border-radius:var(--radius);padding:26px;background:linear-gradient(180deg,var(--panel-2),var(--panel));transition:border-color .25s,transform .25s}
+.path-card:hover{border-color:var(--accent-line);transform:translateY(-3px)}
+.path-card .api{font-family:var(--mono);font-size:14.5px;color:var(--accent);letter-spacing:.01em}
+.path-card .name{font-size:15px;font-weight:700;margin-top:6px}
+.path-card p{font-size:13.2px;color:var(--text-dim);margin-top:8px}
+.path-card ul{list-style:none;display:grid;gap:9px;margin-top:16px;font-size:12.8px;color:var(--text-dim)}
+.path-card li{display:flex;gap:8px}
+.path-card li::before{content:"›";color:var(--accent);flex:none}
+.path-card .snippet{
+  margin-top:18px;padding:11px 13px;border-radius:9px;background:#0C0A06;border:1px solid var(--line);
+  font-family:var(--mono);font-size:11.6px;color:#E9DCB2;overflow-x:auto;white-space:nowrap;
+}
+
+/* 特性 */
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{
+  border:1px solid var(--line);border-radius:var(--radius);padding:24px 22px;
+  background:linear-gradient(180deg,var(--panel-2),var(--panel));
+  transition:border-color .25s,transform .25s;
+}
+.card:hover{border-color:var(--accent-line);transform:translateY(-3px)}
+.card .ico{
+  width:38px;height:38px;border-radius:10px;display:grid;place-items:center;margin-bottom:16px;
+  background:var(--accent-soft);border:1px solid rgba(247,207,85,.2);color:var(--accent);
+}
+.card .ico svg{width:19px;height:19px}
+.card h3{font-size:15.5px;font-weight:700;margin-bottom:8px;letter-spacing:.01em}
+.card p{font-size:13.3px;color:var(--text-dim);line-height:1.7}
+.card code{font-family:var(--mono);font-size:12.3px;color:#F3E4B4;background:rgba(255,255,255,.045);padding:1px 5px;border-radius:4px}
+
+/* 截图 */
+.shots{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.shot{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#0B0A07;transition:border-color .25s,transform .25s}
+.shot:hover{border-color:var(--accent-line);transform:translateY(-3px)}
+.shot img{width:100%;height:auto}
+.shot figcaption{padding:12px 16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--text-dim);display:flex;justify-content:space-between;gap:10px}
+.shot figcaption span{color:var(--text-mute);font-family:var(--mono);font-size:11px;flex:none}
+
+/* 代码 + 安装 */
+.two-col{display:grid;grid-template-columns:1.15fr .85fr;gap:34px;align-items:start}
+.code-shell{border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;background:#0A0906}
+.tabs{display:flex;gap:2px;padding:8px 8px 0;border-bottom:1px solid var(--line);background:#0E0C07;overflow-x:auto}
+.tab{
+  border:0;background:transparent;color:var(--text-mute);font-family:var(--sans);
+  font-size:12.8px;padding:9px 14px;border-radius:8px 8px 0 0;cursor:pointer;white-space:nowrap;
+  border-bottom:1px solid transparent;transition:color .2s,background .2s;
+}
+.tab:hover{color:var(--text-dim)}
+.tab.active{color:var(--accent);background:var(--accent-soft);border-bottom-color:var(--accent)}
+.pane{display:none}
+.pane.active{display:block}
+.pane-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px 0;font-family:var(--mono);font-size:11.5px;color:var(--text-mute)}
+pre{overflow-x:auto;padding:18px 20px 22px;font-family:var(--mono);font-size:12.4px;line-height:1.8;tab-size:4;scrollbar-width:thin;scrollbar-color:rgba(247,207,85,.35) transparent}
+pre::-webkit-scrollbar{height:8px}
+pre::-webkit-scrollbar-track{background:rgba(255,255,255,.03);border-radius:8px}
+pre::-webkit-scrollbar-thumb{background:rgba(247,207,85,.28);border-radius:8px}
+pre::-webkit-scrollbar-thumb:hover{background:rgba(247,207,85,.45)}
+pre code{color:#D8D0BA}
+.k{color:#FFD98A}
+.s{color:#B7D8A8}
+.c{color:#6C6553;font-style:italic}
+.t{color:#9BC7FF}
+
+.install{border:1px solid var(--line);border-radius:var(--radius);padding:24px;background:var(--panel);position:sticky;top:84px}
+.install h3{font-size:15px;font-weight:700;margin-bottom:6px}
+.install > p{font-size:13px;color:var(--text-dim);margin-bottom:16px}
+.note{
+  display:flex;gap:10px;font-size:12.5px;color:#FFB6A6;line-height:1.6;
+  background:rgba(255,139,118,.07);border:1px solid rgba(255,139,118,.26);border-radius:10px;padding:11px 13px;margin-bottom:18px;
+}
+.note svg{width:15px;height:15px;flex:none;margin-top:2px}
+.step{display:grid;gap:8px;margin-bottom:16px}
+.step .step-h{display:flex;align-items:center;gap:9px;font-size:12.8px;color:var(--text-dim)}
+.step .step-h b{
+  width:20px;height:20px;border-radius:50%;display:grid;place-items:center;flex:none;
+  font-size:11px;font-family:var(--mono);background:var(--accent-soft);color:var(--accent);border:1px solid var(--accent-line);
+}
+.copy-row{display:flex;align-items:center;gap:8px;border:1px solid var(--line-strong);border-radius:10px;padding:9px 10px 9px 13px;background:#0B0A07}
+.copy-row code{flex:1;min-width:0;font-family:var(--mono);font-size:11.6px;color:#F0E4B6;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.copy-btn{
+  flex:none;display:inline-flex;align-items:center;gap:5px;border:1px solid var(--line-strong);
+  background:rgba(255,255,255,.04);color:var(--text-dim);border-radius:7px;
+  font-size:11.5px;padding:5px 9px;cursor:pointer;font-family:var(--sans);transition:.2s;
+}
+.copy-btn:hover{color:var(--accent);border-color:var(--accent-line);background:var(--accent-soft)}
+.copy-btn svg{width:13px;height:13px}
+.install .tip{font-size:11.8px;color:var(--text-mute);margin-top:4px;line-height:1.6}
+.alt{margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+.alt h4{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-mute);margin-bottom:9px;font-weight:600}
+.alt ul{list-style:none;display:grid;gap:7px;font-size:11.8px;color:var(--text-dim);line-height:1.65}
+.alt ul b{color:var(--text);font-weight:600}
+.alt code{font-family:var(--mono);font-size:11px;color:#EEDFAF;background:rgba(255,255,255,.045);padding:1px 4px;border-radius:4px;word-break:break-all}
+.spec{display:grid;gap:9px;margin-top:20px;padding-top:18px;border-top:1px solid var(--line);font-size:12.3px}
+.spec div{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.spec span{color:var(--text-mute);flex:none}
+.spec b{font-family:var(--mono);font-weight:400;color:var(--text-dim);font-size:11.6px;text-align:right}
+
+/* 生态 */
+.eco{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.eco-card{display:flex;gap:18px;align-items:flex-start;border:1px solid var(--line);border-radius:var(--radius);padding:24px;background:var(--panel);transition:border-color .25s}
+.eco-card:hover{border-color:var(--accent-line)}
+.eco-card .ico{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;flex:none;background:var(--accent-soft);border:1px solid rgba(247,207,85,.2);color:var(--accent)}
+.eco-card .ico svg{width:20px;height:20px}
+.eco-card h3{font-size:15px;font-weight:700;margin-bottom:5px}
+.eco-card p{font-size:13px;color:var(--text-dim)}
+.eco-card .link{display:inline-flex;align-items:center;gap:6px;font-size:12.4px;color:var(--accent);margin-top:10px;font-family:var(--mono)}
+.eco-card .link svg{width:13px;height:13px}
+
+/* 底部 */
+.cta-box{
+  border:1px solid var(--accent-line);border-radius:22px;padding:44px 40px;
+  background:
+    radial-gradient(600px 200px at 20% 0%,rgba(247,207,85,.14),transparent 70%),
+    linear-gradient(180deg,#12100A,#0A0906);
+  display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center;
+}
+.cta-box h2{font-size:clamp(22px,2.5vw,30px);font-weight:800;letter-spacing:-.3px;line-height:1.35}
+.cta-box p{color:var(--text-dim);font-size:14px;margin-top:8px}
+.cta-actions{display:flex;flex-wrap:wrap;gap:12px}
+footer{border-top:1px solid var(--line);margin-top:24px;padding:44px 0 40px}
+.foot{display:grid;grid-template-columns:1.4fr 1fr 1fr auto;gap:32px;align-items:start}
+.foot .brand{margin-bottom:12px}
+.foot p.small{font-size:12.6px;color:var(--text-mute);line-height:1.8;max-width:320px}
+.foot h4{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-mute);margin-bottom:12px;font-weight:600}
+.foot ul{list-style:none;display:grid;gap:8px;font-size:13px}
+.foot ul a{color:var(--text-dim);transition:color .2s}
+.foot ul a:hover{color:var(--accent)}
+.qr{display:flex;gap:14px}
+.qr figure{text-align:center}
+.qr img{width:96px;border-radius:8px;border:1px solid var(--line);background:#fff;padding:4px}
+.qr figcaption{font-size:11px;color:var(--text-mute);margin-top:7px}
+.legal{border-top:1px solid var(--line);margin-top:34px;padding-top:20px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;font-size:12px;color:var(--text-mute)}
+
+/* toast */
+.toast{
+  position:fixed;left:50%;bottom:32px;transform:translate(-50%,20px);opacity:0;pointer-events:none;
+  background:rgba(247,207,85,.16);border:1px solid var(--accent-line);color:var(--accent);
+  padding:9px 18px;border-radius:10px;font-size:13px;backdrop-filter:blur(8px);z-index:60;transition:.25s;
+}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+/* 入场动画 */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ================= 响应式 ================= */
+@media (max-width:1000px){
+  section{padding:58px 0}
+  .hero-grid{grid-template-columns:1fr;gap:44px}
+  .shot-frame{transform:none}
+  .features{grid-template-columns:1fr 1fr}
+  .shots{grid-template-columns:1fr 1fr}
+  .paths{grid-template-columns:1fr}
+  .two-col{grid-template-columns:1fr}
+  .install{position:static}
+  .cta-box{grid-template-columns:1fr;padding:34px 26px}
+  .foot{grid-template-columns:1fr 1fr}
+  .qr{grid-column:1/-1}
+}
+@media (max-width:760px){
+  .nav-links{display:none}
+  .nav-toggle{display:grid;place-items:center}
+  .nav-cta{display:none}
+  .hero{padding:52px 0 40px}
+  .compare{grid-template-columns:1fr}
+  .features{grid-template-columns:1fr}
+  .shots{grid-template-columns:1fr}
+  .sec-head{flex-direction:column;align-items:flex-start;gap:10px}
+  .metrics{gap:18px 28px}
+  .metric b{font-size:21px}
+  section{padding:54px 0}
+  .cta-actions .btn{width:100%}
+  .legal{flex-direction:column}
+  pre{font-size:12.2px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== 导航 ===== -->
+<header class="nav">
+  <div class="nav-in">
+    <a class="brand" href="#top">
+      <span class="brand-mark"><i class="mark-iris" aria-hidden="true"></i></span>
+      XGUI
+    </a>
+    <nav class="nav-links">
+      <a href="#why">对比</a>
+      <a href="#paths">写法</a>
+      <a href="#features">特性</a>
+      <a href="#shots">界面</a>
+      <a href="#start">上手</a>
+      <a href="https://github.com/SevenStrike/XGUI" target="_blank" rel="noopener">GitHub ↗</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-primary" href="https://github.com/SevenStrike/XGUI" target="_blank" rel="noopener">
+        <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+        查看仓库
+      </a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="展开菜单" aria-expanded="false">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="#why">对比</a>
+    <a href="#paths">写法</a>
+    <a href="#features">特性</a>
+    <a href="#shots">界面</a>
+    <a href="#start">上手</a>
+    <a href="https://github.com/SevenStrike/XGUI" target="_blank" rel="noopener">GitHub ↗</a>
+  </nav>
+</header>
+
+<main id="top">
+
+<!-- ===== Hero ===== -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow"><i></i>Unity 6 · UPM · AGPL-3.0</span>
+      <h1>一套皮肤，<br><span class="grad">两种写法。</span></h1>
+      <p class="lead">
+        XGUI 是一套面向 Unity Editor 扩展的界面可视化组件库。工具窗口与 Inspector 不再靠零散拼凑的
+        <span style="font-family:var(--mono);font-size:14.5px;color:var(--text)">GUIStyle</span>
+        —— 皮肤、控件、弹窗、图标、缓动曲线与编辑器内动效预览，一次备齐。
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://github.com/SevenStrike/XGUI" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+          GitHub 仓库
+        </a>
+        <a class="btn" href="#start">安装与上手</a>
+      </div>
+      <div class="metrics">
+        <div class="metric"><b>17<span>种</span></b><small>主题色</small></div>
+        <div class="metric"><b>20<span>+</span></b><small>可配置控件</small></div>
+        <div class="metric"><b>43<span>种</span></b><small>缓动曲线</small></div>
+        <div class="metric"><b>120<span>+</span></b><small>内置图标</small></div>
+      </div>
+    </div>
+
+    <div class="hero-shot reveal">
+      <div class="shot-frame">
+        <div class="shot-bar"><i></i><i></i><i></i><span>XGUI · 示例窗口</span></div>
+        <img src="Docs/p_8.png" alt="XGUI 示例窗口：标题、类型切换、横幅与容器组件" loading="eager">
+      </div>
+      <span class="float-chip chip-a">17 themes</span>
+      <div class="palette">
+        <span class="sw" style="background:#232323" title="深空灰 #232323"></span>
+        <span class="sw" style="background:#909090" title="阴影灰 #909090"></span>
+        <span class="sw" style="background:#e8e8e8" title="亮白 #e8e8e8"></span>
+        <span class="sw" style="background:#c9e63f" title="柠檬绿 #c9e63f"></span>
+        <span class="sw" style="background:#38aafb" title="工业蓝 #38aafb"></span>
+        <span class="sw" style="background:#ffc230" title="警示黄 #ffc230"></span>
+        <span class="sw" style="background:#fa5d98" title="玫瑰粉 #fa5d98"></span>
+        <span class="sw" style="background:#9e5afb" title="神秘紫 #9e5afb"></span>
+        <span class="sw" style="background:#ff3737" title="魅力红 #ff3737"></span>
+        <span class="sw" style="background:#94a565" title="灰绿 #94a565"></span>
+        <span class="sw" style="background:#ff872e" title="亮橘红 #ff872e"></span>
+        <span class="sw" style="background:#747474" title="枪灰 #747474"></span>
+        <span class="sw" style="background:#ffd86b" title="亮金色 #ffd86b"></span>
+        <span class="sw" style="background:#a32a2a" title="沉暗红 #a32a2a"></span>
+        <span class="sw" style="background:#76829a" title="烟灰蓝 #76829a"></span>
+        <span class="sw" style="background:#4aeec9" title="健康绿 #4aeec9"></span>
+        <span class="sw" style="background:#414141" title="浅灰 #414141"></span>
+      </div>
+      <p class="palette-note">17 主题色 · 5 种填充 · 80 套预制底板贴图</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 为什么 ===== -->
+<section id="why">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <div class="sec-kicker">Why XGUI</div>
+        <h2>别再为每个窗口<br>重新拼一套 GUIStyle</h2>
+      </div>
+      <p>编辑器工具的门槛往往不在功能，而在外观：控件零散、状态缺失、风格各写各的，做着做着就成了“能跑就行”。</p>
+    </div>
+
+    <div class="compare">
+      <div class="col bad reveal">
+        <h3>手工拼样式 <em>每个窗口一套</em></h3>
+        <ul>
+          <li><span class="mark">✕</span><span>每个控件手写 <b>GUIStyle</b>，normal / hover / pressed 三态逐个对齐</span></li>
+          <li><span class="mark">✕</span><span>字体、图标、底板贴图自己找，<b>风格在窗口之间漂移</b></span></li>
+          <li><span class="mark">✕</span><span>弹窗只能用系统 <b>DisplayDialog</b>，样式完全脱离工具自身风格</span></li>
+          <li><span class="mark">✕</span><span>多选时混合态要自己判 <b>hasMultipleDifferentValues</b>，还得逐个回写</span></li>
+        </ul>
+      </div>
+      <div class="col good reveal">
+        <h3>XGUI <em>一套皮肤贯穿</em></h3>
+        <ul>
+          <li><span class="mark">✓</span><span>内置 <b>XGUI.guiskin</b>，所有控件共用一套皮肤，调用即统一</span></li>
+          <li><span class="mark">✓</span><span><b>17 主题色 × 5 种填充</b>，80 套预制底板贴图，颜色可枚举也可直接传</span></li>
+          <li><span class="mark">✓</span><span><b>dialog_*</b> 三形态弹窗，主题色可传任意 Color，风格与主窗口一致</span></li>
+          <li><span class="mark">✓</span><span>把 <b>SerializedProperty</b> 直接交给控件，混合态显示 <b>—</b> 并可一键统一</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 两种写法 ===== -->
+<section id="paths">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <div class="sec-kicker">Two APIs</div>
+        <h2>自动排版与精确绘制，<br>同一个窗口里也能混用</h2>
+      </div>
+      <p>两套 API 功能对等：想少写 Rect 就用 layout_*，想完全掌控位置就用 gui_*。</p>
+    </div>
+
+    <div class="paths">
+      <div class="path-card reveal">
+        <div class="api">layout_*</div>
+        <div class="name">自动布局</div>
+        <p>基于 GUILayout / EditorGUILayout 的流式排列，窗口缩放自动跟随，适合设置面板与 Inspector。</p>
+        <ul>
+          <li>分组、开关、滑块、按钮一行一个调用</li>
+          <li><code style="font-family:var(--mono);color:#F3E4B4">editor_layout_group_*</code> 版会返回分组 Rect，便于自绘</li>
+          <li>间距与弹性占位内置，无需手算高度</li>
+        </ul>
+        <div class="snippet">XGUI.layout_slider(title: "速度", prop: speed, left: 0, right: 100);</div>
+      </div>
+      <div class="path-card reveal">
+        <div class="api">gui_*</div>
+        <div class="name">精确绘制</div>
+        <p>基于 Rect 的精确摆放，位置尺寸完全可控，适合自绘面板、叠加布局与卡片、虚拟列表。</p>
+        <ul>
+          <li>区域、背景块、卡片、色相条等只在 gui_* 提供的组件</li>
+          <li><code style="font-family:var(--mono);color:#F3E4B4">gui_scrollview&lt;T&gt;</code> 只绘制可见项，带高度缓存</li>
+          <li>与 layout_* 混用时用 <code style="font-family:var(--mono);color:#F3E4B4">gui_area_start</code> 圈出独立区域</li>
+        </ul>
+        <div class="snippet">XGUI.gui_area_start(rect); ... XGUI.gui_area_end(rect);</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 特性 ===== -->
+<section id="features">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <div class="sec-kicker">Features</div>
+        <h2>从皮肤到动效，<br>都在一个包里</h2>
+      </div>
+      <p>零配置：首次调用自动加载皮肤、字体与纹理缓存。资源全部走 AssetDatabase，包模式与 Assets 模式都能定位。</p>
+    </div>
+
+    <div class="features">
+      <article class="card reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18" opacity=".45"/><circle cx="12" cy="12" r="3.4"/></svg></div>
+        <h3>17 主题 × 5 填充</h3>
+        <p>深空灰、亮金色、工业蓝、健康绿… 配合实体 / 边框 / 缺口边框等 5 种容器填充，共 80 套预制底板。</p>
+      </article>
+      <article class="card reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 10v10"/></svg></div>
+        <h3>20 余种控件</h3>
+        <p>分组、按钮、横幅、帮助框、输入、开关、滑块、下拉、颜色、曲线、工具栏、进度、状态、卡片、虚拟列表、路径选择器。</p>
+      </article>
+      <article class="card reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M7 15h10"/></svg></div>
+        <h3>三形态弹窗</h3>
+        <p>标准对话框、名称 + 描述提交框、可拖动排序的列表选择框；1~5 个按钮自动布局，6 种对话框类型。</p>
+      </article>
+      <article class="card reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 4l10 8-10 8V4Z"/><path d="M20 4v16" opacity=".5"/></svg></div>
+        <h3>EditorPlayer 动效预览</h3>
+        <p>数值插值、序列帧、音效预览三件套，共用 <code>EditorApplication.update</code> 驱动，无需进入 Play Mode。</p>
+      </article>
+      <article class="card reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 18c4-12 12 12 16 0"/><path d="M4 18h4M16 18h4" opacity=".5"/></svg></div>
+        <h3>43 种缓动曲线</h3>
+        <p>标准缓动加 <code>Shake</code> / <code>Flash</code> / <code>Glitch</code> 等特效曲线，按 2~100 个关键帧采样并写入切线。</p>
+      </article>
+      <article class="card reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h9M4 12h6M4 17h9"/><circle cx="18" cy="8" r="2.2"/><circle cx="18" cy="16" r="2.2"/></svg></div>
+        <h3>SerializedProperty 原生</h3>
+        <p>开关、滑块、下拉、颜色、属性框直接吃属性对象；多选时自动显示 <code>—</code> 混合态并支持一键统一。</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 界面 ===== -->
+<section id="shots">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <div class="sec-kicker">Inside the Editor</div>
+        <h2>组件长什么样</h2>
+      </div>
+      <p>下面四张都来自包内 Demo 资产。主题色、填充方式、图标与字号都是调用参数，改一行就换一套外观。</p>
+    </div>
+
+    <div class="shots">
+      <figure class="shot reveal">
+        <img src="Docs/p_4.png" alt="下拉选择菜单与可折叠参数分组" loading="lazy">
+        <figcaption>下拉 + 参数分组<span>布局</span></figcaption>
+      </figure>
+      <figure class="shot reveal">
+        <img src="Docs/p_5.png" alt="三层堆叠卡片，滚动切换正反向" loading="lazy">
+        <figcaption>三层堆叠卡片<span>Card</span></figcaption>
+      </figure>
+      <figure class="shot reveal">
+        <img src="Docs/p_7.png" alt="工具条与路径选择器，自动与手动布局对照" loading="lazy">
+        <figcaption>工具条 · 路径选择器<span>Toolbar</span></figcaption>
+      </figure>
+      <figure class="shot reveal">
+        <img src="Docs/p_6.png" alt="状态显示、缓动曲线预览与虚拟滚动列表" loading="lazy">
+        <figcaption>状态 + 虚拟列表<span>Scrollview</span></figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 上手 ===== -->
+<section id="start">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <div class="sec-kicker">Get Started</div>
+        <h2>四行代码，先跑起来</h2>
+      </div>
+      <p>新增一个 EditorWindow，把控件换到 XGUI 的调用即可；已有的布局逻辑不用重写。</p>
+    </div>
+
+    <div class="two-col">
+      <div class="code-shell reveal">
+        <div class="tabs" role="tablist">
+          <button class="tab active" role="tab" data-pane="p1">① 编辑器窗口</button>
+          <button class="tab" role="tab" data-pane="p2">② Inspector</button>
+          <button class="tab" role="tab" data-pane="p3">③ 弹窗</button>
+        </div>
+
+        <div class="pane active" id="p1">
+          <div class="pane-head"><span>my_window.cs</span><span>layout_* 自动布局</span></div>
+<pre><code><span class="k">using</span> SevenStrikeModules.XGUI.Editor;
+<span class="k">using</span> SevenStrikeModules.XGUI.Runtime;
+<span class="k">using</span> UnityEditor;
+<span class="k">using</span> UnityEngine;
+
+<span class="k">public class</span> my_window : EditorWindow
+{
+    <span class="k">private bool</span> fold = <span class="k">true</span>;
+    <span class="k">private bool</span> enable;
+    <span class="k">private float</span> speed = 10f;
+
+    [MenuItem(<span class="s">"Tools/XGUI/示例窗口"</span>)]
+    <span class="k">private static void</span> Open()
+        =&gt; GetWindow&lt;my_window&gt;(<span class="s">"XGUI 示例"</span>);
+
+    <span class="k">private void</span> OnGUI()
+    {
+        fold = XGUI.layout_group_start(
+            type: XGUIContainerType.Vertical,
+            bg_fill: XGUIGroup.缺口纯色边框,
+            bg_color: XGUIColor.亮白,
+            title: <span class="s">"基础设置"</span>,
+            padding: <span class="k">new</span> RectOffset(<span class="s">10</span>, <span class="s">10</span>, <span class="s">20</span>, <span class="s">15</span>),
+            foldout: fold);
+
+        <span class="k">if</span> (fold)
+        {
+            enable = XGUI.layout_toggle(
+                title: <span class="s">"启用模块"</span>,
+                prop: enable,
+                title_width: <span class="s">100</span>);
+
+            speed = XGUI.layout_slider(
+                title: <span class="s">"速度"</span>,
+                prop: speed,
+                left: <span class="s">0</span>, right: <span class="s">100</span>,
+                title_width: <span class="s">100</span>);
+
+            <span class="k">if</span> (XGUI.layout_button(
+                text: <span class="s">"应用设置"</span>,
+                bg_fill: XGUIGroup.实体,
+                bg_color: XGUIColor.亮金色))
+                Debug.Log(<span class="s">$"{enable} / {speed}"</span>);
+        }
+
+        XGUI.layout_group_end(XGUIContainerType.Vertical);
+    }
+}</code></pre>
+        </div>
+
+        <div class="pane" id="p2">
+          <div class="pane-head"><span>my_component_editor.cs</span><span>SerializedProperty</span></div>
+<pre><code><span class="k">using</span> SevenStrikeModules.XGUI.Editor;
+<span class="k">using</span> SevenStrikeModules.XGUI.Runtime;
+<span class="k">using</span> UnityEditor;
+
+[CustomEditor(<span class="k">typeof</span>(my_component))]
+<span class="k">public class</span> my_component_editor : Editor
+{
+    <span class="k">public override void</span> OnInspectorGUI()
+    {
+        serializedObject.Update();
+
+        XGUI.layout_banner(
+            bg_fill: XGUIGroup.实体,
+            bg_color: XGUIColor.深空灰,
+            bg_height: <span class="s">30</span>,
+            title_text: <span class="s">"MyComponent 设置"</span>,
+            title_size: XGUIFontSize.B);
+
+        XGUI.layout_toggle(title: <span class="s">"启用"</span>,
+            prop: serializedObject.FindProperty(<span class="s">"enable"</span>), title_width: <span class="s">80</span>);
+
+        XGUI.layout_slider(title: <span class="s">"强度"</span>,
+            prop: serializedObject.FindProperty(<span class="s">"strength"</span>), left: <span class="s">0f</span>, right: <span class="s">5f</span>, title_width: <span class="s">80</span>);
+
+        serializedObject.ApplyModifiedProperties();
+    }
+}</code></pre>
+        </div>
+
+        <div class="pane" id="p3">
+          <div class="pane-head"><span>dialog</span><span>主题色可传任意 Color</span></div>
+<pre><code>string result = XGUI.dialog(
+    type: XGUIDialogType.警告,
+    windowtitle: <span class="s">"确认删除"</span>,
+    title: <span class="s">"删除资源"</span>,
+    msg: <span class="s">"此操作不可撤销，确定继续吗？"</span>,
+    ok: <span class="s">"删除"</span>,
+    cancel: <span class="s">"取消"</span>,
+    usemodal: <span class="k">true</span>,
+    themecolor: XGUI.GetXGUIColor(XGUIColor.魅力红));
+
+<span class="k">if</span> (result == <span class="s">"删除"</span>)
+{
+    <span class="c">// 执行删除</span>
+}</code></pre>
+        </div>
+      </div>
+
+      <aside class="install reveal">
+        <h3>安装</h3>
+        <p>打开 <code style="font-family:var(--mono);color:#F0E4B6">Window &gt; Package Manager</code>，点 <code style="font-family:var(--mono);color:#F0E4B6">+</code> → <code style="font-family:var(--mono);color:#F0E4B6">Add package from git URL…</code></p>
+
+        <div class="step">
+          <div class="step-h"><b>1</b>粘贴 Git 地址，等待编译完成</div>
+          <div class="copy-row">
+            <code>https://github.com/SevenStrike/XGUI.git?path=com.sevenstrike.xgui</code>
+            <button class="copy-btn" data-copy="https://github.com/SevenStrike/XGUI.git?path=com.sevenstrike.xgui">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 0 1 2-2h9"/></svg>复制
+            </button>
+          </div>
+        </div>
+
+        <div class="note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 16h.01"/><path d="M10.3 3.9 2 18a2 2 0 0 0 1.7 3h16.6A2 2 0 0 0 22 18L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>
+          <span>调用 XGUI 控件的脚本<b>必须位于 Editor 目录或 Editor-only 程序集</b>，否则会因程序集隔离无法引用。</span>
+        </div>
+
+        <p class="tip">示例资产以 UPM Sample 形式提供，导入后位于 <code style="font-family:var(--mono);color:#F0E4B6">Assets/Samples/XGUI/1.0.0/Demo</code>。</p>
+
+        <div class="alt">
+          <h4>其它安装方式</h4>
+          <ul>
+            <li><b>本地磁盘</b>：Add package from disk…，选 <code>com.sevenstrike.xgui/package.json</code></li>
+            <li><b>manifest.json</b>：写 <code>"com.sevenstrike.xgui": "file:../com.sevenstrike.xgui"</code></li>
+          </ul>
+        </div>
+
+        <div class="spec">
+          <div><span>包名</span><b>com.sevenstrike.xgui</b></div>
+          <div><span>版本</span><b>1.0.0</b></div>
+          <div><span>Unity</span><b>6000.0.38f1+</b></div>
+          <div><span>程序集</span><b>Runtime · Editor</b></div>
+          <div><span>第三方依赖</span><b>无</b></div>
+          <div><span>授权</span><b>AGPL-3.0</b></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 生态 ===== -->
+<section>
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div>
+        <div class="sec-kicker">Ecosystem</div>
+        <h2>与 XBinder 一起用</h2>
+      </div>
+      <p>XGUI 负责画，XBinder 负责数据。同属 SevenStrike 的 Unity 工具链，可装在同一项目里。</p>
+    </div>
+    <div class="eco">
+      <div class="eco-card reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h10"/><circle cx="18" cy="17" r="2.6"/></svg></div>
+        <div>
+          <h3>XBinder · 数据绑定</h3>
+          <p>全局键值总线 + 适配器订阅，UI 与数据源解耦。它的全部 Inspector 面板由 XGUI 绘制，装 XBinder 前需先装本包。</p>
+          <a class="link" href="https://github.com/SevenStrike/XBinder" target="_blank" rel="noopener">
+            github.com/SevenStrike/XBinder
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="eco-card reveal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h6M7 13h10M7 17h4" opacity=".7"/></svg></div>
+        <div>
+          <h3>示例资产 · 导入即用</h3>
+          <p><code style="font-family:var(--mono);color:#F3E4B4">XGUISamples.asset</code> 与两个工具窗口，覆盖分组、开关、滑块、颜色、曲线、列表与动效预览。</p>
+          <a class="link" href="https://github.com/SevenStrike/XGUI" target="_blank" rel="noopener">
+            github.com/SevenStrike/XGUI
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA ===== -->
+<section style="padding-top:16px;padding-bottom:28px">
+  <div class="wrap">
+    <div class="cta-box reveal">
+      <div>
+        <h2>下一块面板，<br>直接照着皮肤画</h2>
+        <p>仓库里带完整说明与示例资产，欢迎提 Issue，也欢迎 Star。</p>
+      </div>
+      <div class="cta-actions">
+        <a class="btn btn-primary" href="https://github.com/SevenStrike/XGUI" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/></svg>
+          GitHub
+        </a>
+        <a class="btn" href="https://github.com/SevenStrike/XGUI/releases" target="_blank" rel="noopener">Release Notes</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===== 底部 ===== -->
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="brand" href="#top">
+          <span class="brand-mark"><i class="mark-iris" aria-hidden="true"></i></span>
+          XGUI
+        </a>
+        <p class="small">Unity Editor 界面可视化组件库 · 作者徐寅智 / SevenStrikeMedia<br>授权协议 GNU AGPL-3.0，使用与分发请遵守协议条款。</p>
+      </div>
+      <div>
+        <h4>项目</h4>
+        <ul>
+          <li><a href="https://github.com/SevenStrike/XGUI" target="_blank" rel="noopener">GitHub 仓库</a></li>
+          <li><a href="https://github.com/SevenStrike/XGUI/blob/main/README.md" target="_blank" rel="noopener">使用文档</a></li>
+          <li><a href="https://github.com/SevenStrike/XGUI/releases" target="_blank" rel="noopener">版本发布</a></li>
+          <li><a href="https://github.com/SevenStrike/XGUI/issues" target="_blank" rel="noopener">问题反馈</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>相关</h4>
+        <ul>
+          <li><a href="https://github.com/SevenStrike/XBinder" target="_blank" rel="noopener">XBinder（数据绑定）</a></li>
+          <li><a href="https://github.com/SevenStrike" target="_blank" rel="noopener">SevenStrike 主页</a></li>
+          <li><a href="https://www.gnu.org/licenses/agpl-3.0.html" target="_blank" rel="noopener">AGPL-3.0 协议</a></li>
+        </ul>
+      </div>
+      <div class="qr">
+        <figure>
+          <img src="Docs/donate.jpg" alt="赞助二维码" loading="lazy" width="96">
+          <figcaption>赞助支持</figcaption>
+        </figure>
+        <figure>
+          <img src="Docs/qqgroups.jpg" alt="技术交流群二维码" loading="lazy" width="96">
+          <figcaption>技术交流群</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 SevenStrikeMedia · XGUI v1.0.0</span>
+      <span>Unity 6000.0.38f1+ · UPM · com.sevenstrike.xgui</span>
+    </div>
+  </div>
+</footer>
+
+<div class="toast" id="toast">已复制到剪贴板</div>
+
+<script>
+/* ===== 复制 ===== */
+(function(){
+  var toast = document.getElementById('toast');
+  var timer = null;
+  function showToast(text){
+    toast.textContent = text;
+    toast.classList.add('on');
+    clearTimeout(timer);
+    timer = setTimeout(function(){ toast.classList.remove('on'); }, 1800);
+  }
+  function fallbackCopy(text){
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly','');
+    ta.style.position = 'fixed';
+    ta.style.top = '-1000px';
+    document.body.appendChild(ta);
+    ta.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch(e){ ok = false; }
+    document.body.removeChild(ta);
+    return ok;
+  }
+  document.addEventListener('click', function(e){
+    var btn = e.target.closest('.copy-btn');
+    if(!btn) return;
+    var text = btn.getAttribute('data-copy') || '';
+    var label = btn.innerHTML;
+    function done(){
+      btn.innerHTML = '✓ 已复制';
+      showToast('已复制到剪贴板');
+      setTimeout(function(){ btn.innerHTML = label; }, 1600);
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(done).catch(function(){
+        if(fallbackCopy(text)) done(); else showToast('复制失败，请手动选择');
+      });
+    } else {
+      if(fallbackCopy(text)) done(); else showToast('复制失败，请手动选择');
+    }
+  });
+})();
+
+/* ===== 移动端菜单 ===== */
+(function(){
+  var btn = document.getElementById('navToggle');
+  var menu = document.getElementById('mobileMenu');
+  if(!btn || !menu) return;
+  btn.addEventListener('click', function(){
+    var open = menu.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  menu.addEventListener('click', function(e){
+    if(e.target.tagName === 'A'){
+      menu.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
+    }
+  });
+})();
+
+/* ===== 代码页签 ===== */
+(function(){
+  var tabs = document.querySelectorAll('.tab');
+  tabs.forEach(function(tab){
+    tab.addEventListener('click', function(){
+      tabs.forEach(function(t){ t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected','true');
+      document.querySelectorAll('.pane').forEach(function(p){ p.classList.remove('active'); });
+      var pane = document.getElementById(tab.getAttribute('data-pane'));
+      if(pane) pane.classList.add('active');
+    });
+  });
+})();
+
+/* ===== 入场动画 ===== */
+(function(){
+  var items = document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){
+    items.forEach(function(el){ el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+  items.forEach(function(el, i){
+    el.style.transitionDelay = (i % 6) * 60 + 'ms';
+    io.observe(el);
+  });
+})();
+</script>
+</body>
+</html>
